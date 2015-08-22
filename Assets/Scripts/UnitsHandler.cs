@@ -29,12 +29,7 @@ public class UnitsHandler : MonoBehaviour
     }
 
     private void RemoveKilledUnits() {
-        List<GameObject> dead = new List<GameObject>();
-        foreach (var unit in this.units) {
-            if (unit == null) {
-                dead.Add(unit);
-            }
-        }
+        List<GameObject> dead = this.units.Where(unit => unit == null).ToList();
 
         dead.ForEach(d => units.Remove(d));
     }
