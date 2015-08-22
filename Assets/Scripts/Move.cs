@@ -1,38 +1,75 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public float Speed = 1;
     private GameObject destination;
     private Rigidbody2D body;
+    private bool shouldMove;
+    public float Speed = 1;
 
-    public void SetDestination(GameObject destination)
+    public void FindNewDestination(IEnumerable<GameObject> buildings)
     {
-        this.destination = destination;
+        if(this.destination != null || !this.shouldMove)
+        {
+            return;
+        }
+
+        GameObject closest = null;
+        float distance = 0f;
+
+        foreach(var building in buildings)
+        {
+            float newDistance = Vector2.Distance(this.body.position, building.transform.position);
+
+            if(newDistance >= distance && distance != 0)
+            {
+                continue;
+            }
+            distance = newDistance;
+            closest = building;
+        }
+
+        this.destination = closest;
     }
 
     // Use this for initialization
     private void Start()
     {
-        this.body = GetComponent<Rigidbody2D>();
+        this.body = this.GetComponent<Rigidbody2D>();
+        this.SetShouldMove();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (destination == null)
+        if(this.destination == null)
         {
+            this.SetShouldMove();
+            this.body.velocity = new Vector2(0, 0);
             return;
         }
 
-        Vector2 towards = destination.transform.position - transform.position;
+        Vector2 towards = this.destination.transform.position - this.transform.position;
 
-        body.velocity = towards;
+        this.body.velocity = towards;
+    }
 
-        if (transform.position == destination.transform.position)
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "Building" && !coll.isTrigger)
         {
-            destination = null;
+            this.SetShouldNotMove();
         }
+    }
+
+    private void SetShouldNotMove()
+    {
+        this.shouldMove = false;
+    }
+
+    private void SetShouldMove()
+    {
+        this.shouldMove = true;
     }
 }

@@ -5,13 +5,13 @@ using UnityEngine;
 public class SpawnOnClick : MonoBehaviour
 {
     public Transform Monster;
-    private Camera camera;
+    private Camera cam;
     private List<BoxCollider2D> spawns;
 
     // Use this for initialization
     private void Start()
     {
-        this.camera = Camera.main;
+        this.cam = Camera.main;
         this.spawns = GameObject.FindGameObjectsWithTag("Spawn").Select(go => go.GetComponent<BoxCollider2D>()).ToList();
     }
 
@@ -26,7 +26,7 @@ public class SpawnOnClick : MonoBehaviour
 
     private void SpawnOnPosition(Vector3 mousePosition)
     {
-        var worldPosition = this.camera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, this.camera.transform.position.z));
+        var worldPosition = this.cam.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, this.cam.transform.position.z));
 
         if (this.spawns.Any(s => s.OverlapPoint(worldPosition)))
         {

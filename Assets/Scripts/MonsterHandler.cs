@@ -23,9 +23,7 @@ public class MonsterHandler : MonoBehaviour
 
         foreach(var unit in this.units)
         {
-            Vector2 position = unit.GetComponent<Rigidbody2D>().position;
-
-            unit.GetComponent<Move>().SetDestination(this.GetDistanceFrom(position));
+            unit.GetComponent<Move>().FindNewDestination(this.buildings);
         }
     }
 
@@ -33,25 +31,5 @@ public class MonsterHandler : MonoBehaviour
         List<GameObject> dead = this.units.Where(unit => unit == null).ToList();
 
         dead.ForEach(d => units.Remove(d));
-    }
-
-    private GameObject GetDistanceFrom(Vector2 position)
-    {
-        GameObject closest = null;
-        float distance = 0f;
-
-        foreach(var building in buildings)
-        {
-            float newDistance = Vector2.Distance(position, building.transform.position);
-
-            if(newDistance >= distance && distance != 0)
-            {
-                continue;
-            }
-            distance = newDistance;
-            closest = building;
-        }
-
-        return closest;
     }
 }
