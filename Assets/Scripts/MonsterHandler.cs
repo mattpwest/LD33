@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class UnitsHandler : MonoBehaviour
+public class MonsterHandler : MonoBehaviour
 {
     private List<GameObject> units;
     private List<GameObject> buildings;
