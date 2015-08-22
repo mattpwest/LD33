@@ -1,0 +1,11 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: Buildings.png (128 x 64)
+# $TexturePacker:SmartUpdate:0c13ca5c5e65ed545265a580c82b49ff:96f10b44fe5a835e5d65419fa8fe5f80:0914be47232f3f583bfa6bd3d7ba5303$
+#
+
+BuildingHovel;2;26;64;36;0.5;0.4722222222222222
