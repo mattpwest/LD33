@@ -18,7 +18,8 @@ public class UnitsHandler : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        RemoveKilledUnits();
+        this.buildings = GameObject.FindGameObjectsWithTag("Building").ToList();
+        this.units = GameObject.FindGameObjectsWithTag("Monster").ToList();
 
         foreach(var unit in this.units)
         {
