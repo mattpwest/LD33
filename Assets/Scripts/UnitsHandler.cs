@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitsHandler : MonoBehaviour
 {
-    private List<Move> units;
+    private List<GameObject> units;
     private List<GameObject> buildings;
     public GameObject BuildingsParent;
 
@@ -12,18 +12,31 @@ public class UnitsHandler : MonoBehaviour
     private void Start()
     {
         this.buildings = GameObject.FindGameObjectsWithTag("Building").ToList();
-        this.units = this.gameObject.GetComponentsInChildren<Move>().ToList();
+        this.units = GameObject.FindGameObjectsWithTag("Monster").ToList();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        RemoveKilledUnits();
+
         foreach(var unit in this.units)
         {
             Vector2 position = unit.GetComponent<Rigidbody2D>().position;
 
-            unit.SetDestination(this.GetDistanceFrom(position));
+            unit.GetComponent<Move>().SetDestination(this.GetDistanceFrom(position));
         }
+    }
+
+    private void RemoveKilledUnits() {
+        List<GameObject> dead = new List<GameObject>();
+        foreach (var unit in this.units) {
+            if (unit == null) {
+                dead.Add(unit);
+            }
+        }
+
+        dead.ForEach(d => units.Remove(d));
     }
 
     private GameObject GetDistanceFrom(Vector2 position)
