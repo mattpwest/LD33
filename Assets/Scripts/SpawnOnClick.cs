@@ -28,11 +28,6 @@ public class SpawnOnClick : MonoBehaviour
 
     private void SpawnOnPosition(Vector3 mousePosition)
     {
-        if (!maySpawn) {
-            maySpawn = true;
-            return;
-        }
-
         var worldPosition = this.camera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, this.camera.transform.position.z));
 
         if (this.spawns.Any(s => s.OverlapPoint(worldPosition)))
