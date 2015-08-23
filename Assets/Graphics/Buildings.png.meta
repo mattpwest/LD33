@@ -5,6 +5,8 @@ licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: BuildingHovel
+    21300002: BuildingCastle
+    21300004: BuildingChurch
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -31,7 +33,7 @@ TextureImporter:
   maxTextureSize: 4096
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -44,21 +46,41 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: BuildingHovel
+    - name: BuildingCastle
       rect:
         serializedVersion: 2
         x: 2
-        y: 26
-        width: 64
-        height: 36
+        y: 62
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BuildingChurch
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 5
+        width: 77
+        height: 55
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BuildingHovel
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 235
+        width: 32
+        height: 19
       alignment: 9
-      pivot: {x: .5, y: .472222209}
+      pivot: {x: .5, y: .473684222}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

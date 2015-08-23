@@ -4,8 +4,10 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # http://www.codeandweb.com/texturepacker/unity
 #
-# Sprite sheet: Buildings.png (128 x 64)
-# $TexturePacker:SmartUpdate:0c13ca5c5e65ed545265a580c82b49ff:96f10b44fe5a835e5d65419fa8fe5f80:0914be47232f3f583bfa6bd3d7ba5303$
+# Sprite sheet: Buildings.png (256 x 256)
+# $TexturePacker:SmartUpdate:0112821834e7a800970efc3da2f1bbdc:0ad667a1fd1429af4e370de448aa7ffb:0914be47232f3f583bfa6bd3d7ba5303$
 #
 
-BuildingHovel;2;26;64;36;0.5;0.4722222222222222
+BuildingCastle;2;62;192;192;0.5;0.5
+BuildingChurch;2;5;77;55;0.5;0.5
+BuildingHovel;196;235;32;19;0.5;0.4736842105263158
