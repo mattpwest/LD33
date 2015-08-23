@@ -21,7 +21,7 @@ public class SpawnOnClick : MonoBehaviour
         SelectMonster(initialSelectedMonster);
         this.cam = Camera.main;
         this.spawns = GameObject.FindGameObjectsWithTag("Spawn").Select(go => go.GetComponent<BoxCollider2D>()).ToList();
-        this.terrorBank = GameObject.Find("Overlord").GetComponent<TerrorBank>();
+        this.terrorBank = GameObject.Find("TerrorBank").GetComponent<TerrorBank>();
         buttons = GameObject.FindObjectsOfType<UnityEngine.UI.Button>();
     }
 

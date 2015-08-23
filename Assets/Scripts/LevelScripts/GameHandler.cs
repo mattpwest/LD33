@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using Assets.Scripts.Persistence;
 using Pathfinding.Serialization.JsonFx;
 using UnityEngine;
@@ -8,17 +9,20 @@ public class GameHandler : MonoBehaviour
     private VillageStats villageStats;
     private Clock clock;
     private Player player;
+    private TerrorBank terrorBank;
 
     public GameObject VillageStats;
     public GameObject Clock;
+    public GameObject TerrorBank;
     public int CurrentLevel = 1;
+    public int ExtraTerror = 0;
     public bool IsTesting = true;
 
     private int NextLevel
     {
         get
         {
-            return CurrentLevel + 1;
+            return this.IsTesting ? this.CurrentLevel : this.CurrentLevel + 1;
         }
     }
 
@@ -60,14 +64,20 @@ public class GameHandler : MonoBehaviour
     {
         this.villageStats = this.VillageStats.GetComponent<VillageStats>();
         this.clock = this.Clock.GetComponent<Clock>();
+        this.terrorBank = this.TerrorBank.GetComponent<TerrorBank>();
 
         this.player = this.LoadPlayer();
 
         if(this.IsTesting)
         {
+            this.terrorBank.AddTerror(this.ExtraTerror);
             return;
         }
         this.CurrentLevel = this.player.CurrentLevel;
+        var extraTerror = this.player.Levels
+            .Where(l => l.LevelNumber <= this.CurrentLevel)
+            .Sum(l => l.TerrorRating);
+        this.terrorBank.AddTerror(extraTerror);
     }
 
     // Update is called once per frame
