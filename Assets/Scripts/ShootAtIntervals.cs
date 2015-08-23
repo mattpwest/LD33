@@ -7,12 +7,15 @@ public class ShootAtIntervals : MonoBehaviour {
     public Transform projectile;
     public float shotIntervalSeconds = 5.0f;
     public float arrowSpeed = 5.0f;
+    public float targetRadius = 4.382293f;
     float shotEnergy = 0.0f;
     List<GameObject> targets;
     GameObject target;
+    Vector2 towerPosition;
 
 	void Start () {
-        targets = new List<GameObject>();
+        towerPosition = GetComponent<Rigidbody2D>().position;
+        shotEnergy = shotIntervalSeconds;
 	}
 	
 	void Update () {
@@ -33,12 +36,13 @@ public class ShootAtIntervals : MonoBehaviour {
         }
 
         GameObject newTarget = null;
+        targets = new List<GameObject>(GameObject.FindGameObjectsWithTag("Monster"));
+        float distance = 1000.0f;
         for (int i = 0; i < targets.Count; i++) {
-            if (newTarget == null) {
+            float dist = (targets[i].GetComponent<Rigidbody2D>().position - towerPosition).magnitude;
+            if (dist < targetRadius) {
                 newTarget = targets[i];
-                continue;
-            } else {
-                // TODO: Compare and decide which is the better target
+                distance = dist;
             }
         }
 
@@ -47,6 +51,12 @@ public class ShootAtIntervals : MonoBehaviour {
     }
 
     void Shoot(GameObject target) {
+        float dist = (target.GetComponent<Rigidbody2D>().position - towerPosition).magnitude;
+        if (dist > targetRadius) {
+            target = null;
+            return;
+        }
+
         shotEnergy = 0.0f;
         Rigidbody2D towerBody = this.gameObject.GetComponent<Rigidbody2D>();
         Rigidbody2D targetBody = target.GetComponent<Rigidbody2D>();
@@ -69,5 +79,9 @@ public class ShootAtIntervals : MonoBehaviour {
         if (coll.gameObject.tag == "Monster") {
             targets.Remove(coll.gameObject);
         }
+    }
+
+    void OnDrawGizmos() {
+        UnityEditor.Handles.DrawWireDisc(gameObject.transform.position, Vector3.back, targetRadius);
     }
 }

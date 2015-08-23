@@ -7,6 +7,7 @@ public class Move : MonoBehaviour
     private Rigidbody2D body;
     private bool shouldMove;
     public float Speed = 1;
+    public float Accelleration = 1;
 
     public void FindNewDestination(IEnumerable<GameObject> buildings)
     {
@@ -33,26 +34,28 @@ public class Move : MonoBehaviour
         this.destination = closest;
     }
 
-    // Use this for initialization
     private void Start()
     {
         this.body = this.GetComponent<Rigidbody2D>();
         this.SetShouldMove();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if(this.destination == null)
         {
             this.SetShouldMove();
-            this.body.velocity = new Vector2(0, 0);
+            //this.body.velocity = new Vector2(0, 0);
             return;
         }
 
         Vector2 towards = this.destination.transform.position - this.transform.position;
 
-        this.body.velocity = towards;
+        if (this.body.velocity.magnitude < Speed) {
+            this.body.AddForce(towards.normalized * (Accelleration * this.body.mass / 60.0f));
+        }
+
+        //this.body.velocity = towards;
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
