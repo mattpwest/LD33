@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Persistence;
+using Pathfinding.Serialization.JsonFx;
+using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
     private VillageStats villageStats;
     private Clock clock;
+
     public GameObject VillageStats;
     public GameObject Clock;
+    public int CurrentLevel;
 
     private bool HasTimeRunOut
     {
@@ -33,9 +37,40 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(this.HasTimeRunOut || this.HasAllBuildingsBeenDestroyed)
+        this.CheckIfGameShouldEnd();
+    }
+
+    private void CheckIfGameShouldEnd()
+    {
+        if(!this.HasTimeRunOut && !this.HasAllBuildingsBeenDestroyed)
         {
-            Application.LoadLevel(0);
+            return;
         }
+        this.BuildPlayerInfo();
+        Application.LoadLevel(0);
+    }
+
+    private Player BuildPlayerInfo()
+    {
+        //Player player = (Player)reader.Deserialize(typeof(Player));
+        var player = new Player { CurrentLevel = 0 };
+
+        player.Levels.Add(new Level
+                          {
+                              LevelNumber = this.CurrentLevel, 
+                              TerrorRating = 4
+                          });
+        player.Levels.Add(new Level
+        {
+            LevelNumber = this.CurrentLevel,
+            TerrorRating = 0
+        });
+
+
+        var playerJson = JsonWriter.Serialize(player);
+
+        var playerDes = JsonReader.Deserialize<Player>(playerJson);
+
+        return player;
     }
 }
