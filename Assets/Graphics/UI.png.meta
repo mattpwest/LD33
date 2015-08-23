@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 315e3445830c1554e94335cbb10e2469
-timeCreated: 1440246863
+timeCreated: 1440319256
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: mouth-watering
+    21300002: background
+    21300004: button
+    21300006: mouth-watering-empty
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -31,7 +34,7 @@ TextureImporter:
   maxTextureSize: 4096
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -50,15 +53,45 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: mouth-watering
+    - name: background
       rect:
         serializedVersion: 2
         x: 2
-        y: 126
+        y: 382
         width: 320
         height: 128
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 3, y: 3, z: 3, w: 3}
+    - name: button
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 252
+        width: 320
+        height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 4, z: 3, w: 0}
+    - name: mouth-watering-empty
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 391
+        width: 124
+        height: 119
+      alignment: 9
+      pivot: {x: .495967746, y: .512605071}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth-watering
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 272
+        width: 121
+        height: 117
+      alignment: 9
+      pivot: {x: .5, y: .512820542}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
