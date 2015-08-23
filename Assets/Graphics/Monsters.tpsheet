@@ -5,7 +5,8 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: Monsters.png (64 x 64)
-# $TexturePacker:SmartUpdate:e930ee6fb7efd0a35ee67c447900cc3d:b5e65d70579e49ff1f04ff8831143b1b:88b4fc49195414e79e5b7187c29c787d$
+# $TexturePacker:SmartUpdate:6b78fb5bab62b78d5e73746cab72d0bd:60f14faac1f143814cdb39baa440c23f:88b4fc49195414e79e5b7187c29c787d$
 #
 
-MonsterGoblin;2;30;32;32;0.5;0.5
+MonsterGoblin;2;12;16;16;0.5;0.5
+MonsterTroll;2;30;32;32;0.5;0.5

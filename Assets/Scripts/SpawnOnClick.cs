@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class SpawnOnClick : MonoBehaviour
 {
-    public Transform Monster;
+    public Transform selectedMonster;
     private Camera cam;
+    public Transform goblin;
+    public Transform troll;
     private List<BoxCollider2D> spawns;
 
     // Use this for initialization
@@ -30,7 +32,15 @@ public class SpawnOnClick : MonoBehaviour
 
         if (this.spawns.Any(s => s.OverlapPoint(worldPosition)))
         {
-            Instantiate(Monster, new Vector3(worldPosition.x, worldPosition.y, 0), Quaternion.identity);
+            Instantiate(selectedMonster, new Vector3(worldPosition.x, worldPosition.y, 0), Quaternion.identity);
         }
+    }
+
+    public void SelectGoblin() {
+        selectedMonster = goblin;
+    }
+
+    public void SelectTroll() {
+        selectedMonster = troll;
     }
 }
