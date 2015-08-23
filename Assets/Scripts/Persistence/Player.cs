@@ -1,5 +1,5 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Assets.Scripts.Persistence
 {
@@ -11,6 +11,28 @@ namespace Assets.Scripts.Persistence
         public Player()
         {
             this.Levels = new List<Level>();
+        }
+
+        public void UpdateLevelStats(int levelNumber, int terrorRating)
+        {
+            var levelToUpdate = this.Levels.SingleOrDefault(x => x.LevelNumber == levelNumber);
+
+            if(levelToUpdate == null)
+            {
+                this.Levels.Add(new Level
+                                {
+                                    LevelNumber = levelNumber,
+                                    TerrorRating = terrorRating
+                                });
+                return;
+            }
+
+            if (levelToUpdate.TerrorRating > levelNumber)
+            {
+                return;
+            }
+
+            levelToUpdate.TerrorRating = levelNumber;
         }
     }
 }
