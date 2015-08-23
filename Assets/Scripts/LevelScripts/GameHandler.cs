@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Persistence;
+﻿using System.IO;
+using Assets.Scripts.Persistence;
 using Pathfinding.Serialization.JsonFx;
 using UnityEngine;
 
@@ -27,6 +28,23 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    private string ReadFile(string fileName)
+    {
+        if(!File.Exists(fileName))
+        {
+            return string.Empty;
+        }
+
+        var contents = File.ReadAllText(fileName);
+
+        return contents;
+    }
+
+    private void WriteFile(string fileName, string contents)
+    {
+        File.WriteAllText(fileName, contents);
+    }
+
     // Use this for initialization
     private void Start()
     {
@@ -52,24 +70,31 @@ public class GameHandler : MonoBehaviour
 
     private Player BuildPlayerInfo()
     {
-        //Player player = (Player)reader.Deserialize(typeof(Player));
-        var player = new Player { CurrentLevel = 0 };
-
-        player.Levels.Add(new Level
-                          {
-                              LevelNumber = this.CurrentLevel, 
-                              TerrorRating = 4
-                          });
-        player.Levels.Add(new Level
+        Player player = null;
+        var information = this.ReadFile("Player.json");
+        if(string.IsNullOrEmpty(information))
         {
-            LevelNumber = this.CurrentLevel,
-            TerrorRating = 0
-        });
+            player = new Player { CurrentLevel = 0 };
 
+            player.Levels.Add(new Level
+                              {
+                                  LevelNumber = this.CurrentLevel,
+                                  TerrorRating = 4
+                              });
+            player.Levels.Add(new Level
+                              {
+                                  LevelNumber = this.CurrentLevel,
+                                  TerrorRating = 0
+                              });
+        }
+        else
+        {
+            player = JsonReader.Deserialize<Player>(information);
+        }
 
-        var playerJson = JsonWriter.Serialize(player);
+        information = JsonWriter.Serialize(player);
 
-        var playerDes = JsonReader.Deserialize<Player>(playerJson);
+        this.WriteFile("Player.json", information);
 
         return player;
     }
