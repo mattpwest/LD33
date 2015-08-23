@@ -21,13 +21,13 @@ public class VillageStats : MonoBehaviour
     {
         this.buildings = GameObject.FindGameObjectsWithTag("Building").ToList();
         this.totalTerror = this.buildings.Sum(b => b.GetComponent<TerrorSource>().terror);
-        this.currentTerror = this.totalTerror;
+        this.currentTerror = 0;
     }
 
     // Update is called once per frame
     private void Update()
     {
         buildings.Remove(null);
-        this.currentTerror = this.buildings.Sum(b => b.GetComponent<TerrorSource>().terror);
+        this.currentTerror = this.totalTerror - this.buildings.Sum(b => b.GetComponent<TerrorSource>().terror);
     }
 }
