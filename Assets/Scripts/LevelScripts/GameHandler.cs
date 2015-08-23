@@ -14,6 +14,14 @@ public class GameHandler : MonoBehaviour
     public int CurrentLevel = 1;
     public bool IsTesting = true;
 
+    private int NextLevel
+    {
+        get
+        {
+            return CurrentLevel + 1;
+        }
+    }
+
     private bool HasTimeRunOut
     {
         get
@@ -53,15 +61,13 @@ public class GameHandler : MonoBehaviour
         this.villageStats = this.VillageStats.GetComponent<VillageStats>();
         this.clock = this.Clock.GetComponent<Clock>();
 
-        var playerString = this.ReadFile("Player.json");
+        this.player = this.LoadPlayer();
 
-        this.player = this.BuildPlayerInfo();
-
-        if(this.IsTesting || string.IsNullOrEmpty(playerString))
+        if(this.IsTesting)
         {
             return;
         }
-        this.CurrentLevel = this.Deserialize(playerString).CurrentLevel;
+        this.CurrentLevel = this.player.CurrentLevel;
     }
 
     // Update is called once per frame
@@ -84,8 +90,10 @@ public class GameHandler : MonoBehaviour
 
     private void AllBuildingsDestroyedEnd()
     {
-        this.player.CurrentLevel = this.CurrentLevel + 1;
-        Application.LoadLevel(this.CurrentLevel + 1);
+        this.player.CurrentLevel = this.NextLevel;
+        this.player.UpdateLevelStats(this.CurrentLevel, this.villageStats.GoalsAchieved);
+        this.SavePlayer();
+        Application.LoadLevel(this.NextLevel);
     }
 
     private void TimeHasRunOutEnd()
@@ -93,18 +101,18 @@ public class GameHandler : MonoBehaviour
         Application.LoadLevel(0);
     }
 
-    private Player BuildPlayerInfo()
+    private Player LoadPlayer()
     {
         var information = this.ReadFile("Player.json");
-        var player = string.IsNullOrEmpty(information) ? this.NewEmptyPlayer() : this.Deserialize(information);
 
-        player.UpdateLevelStats(this.CurrentLevel, this.villageStats.GoalsAchieved);
+        return string.IsNullOrEmpty(information) ? this.NewEmptyPlayer() : this.Deserialize(information);
+    }
 
-        information = this.Serialize(player);
+    private void SavePlayer()
+    {
+        var information = this.Serialize(this.player);
 
         this.WriteFile("Player.json", information);
-
-        return player;
     }
 
     private Player Deserialize(string json)
