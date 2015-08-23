@@ -5,8 +5,9 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: Buildings.png (256 x 256)
-# $TexturePacker:SmartUpdate:130361da50084ef4e5996241be6fea63:b31da43f18cbdc2308f5b1cb403e76f7:0914be47232f3f583bfa6bd3d7ba5303$
+# $TexturePacker:SmartUpdate:0112821834e7a800970efc3da2f1bbdc:0ad667a1fd1429af4e370de448aa7ffb:0914be47232f3f583bfa6bd3d7ba5303$
 #
 
 BuildingCastle;2;62;192;192;0.5;0.5
-BuildingHovel;2;24;64;36;0.5;0.4722222222222222
+BuildingChurch;2;5;77;55;0.5;0.5
+BuildingHovel;196;235;32;19;0.5;0.4736842105263158
