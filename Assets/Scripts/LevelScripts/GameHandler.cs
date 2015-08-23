@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using Assets.Scripts.Persistence;
+using Pathfinding.Serialization.JsonFx;
+using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
     private VillageStats villageStats;
     private Clock clock;
+
     public GameObject VillageStats;
     public GameObject Clock;
+    public int CurrentLevel;
 
     private bool HasTimeRunOut
     {
@@ -23,6 +28,23 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    private string ReadFile(string fileName)
+    {
+        if(!File.Exists(fileName))
+        {
+            return string.Empty;
+        }
+
+        var contents = File.ReadAllText(fileName);
+
+        return contents;
+    }
+
+    private void WriteFile(string fileName, string contents)
+    {
+        File.WriteAllText(fileName, contents);
+    }
+
     // Use this for initialization
     private void Start()
     {
@@ -33,9 +55,47 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(this.HasTimeRunOut || this.HasAllBuildingsBeenDestroyed)
+        this.CheckIfGameShouldEnd();
+    }
+
+    private void CheckIfGameShouldEnd()
+    {
+        if(!this.HasTimeRunOut && !this.HasAllBuildingsBeenDestroyed)
         {
-            Application.LoadLevel(0);
+            return;
         }
+        this.BuildPlayerInfo();
+        Application.LoadLevel(0);
+    }
+
+    private Player BuildPlayerInfo()
+    {
+        Player player = null;
+        var information = this.ReadFile("Player.json");
+        if(string.IsNullOrEmpty(information))
+        {
+            player = new Player { CurrentLevel = 0 };
+
+            player.Levels.Add(new Level
+                              {
+                                  LevelNumber = this.CurrentLevel,
+                                  TerrorRating = 4
+                              });
+            player.Levels.Add(new Level
+                              {
+                                  LevelNumber = this.CurrentLevel,
+                                  TerrorRating = 0
+                              });
+        }
+        else
+        {
+            player = JsonReader.Deserialize<Player>(information);
+        }
+
+        information = JsonWriter.Serialize(player);
+
+        this.WriteFile("Player.json", information);
+
+        return player;
     }
 }
