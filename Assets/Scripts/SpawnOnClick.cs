@@ -9,12 +9,14 @@ public class SpawnOnClick : MonoBehaviour
     public Transform goblin;
     public Transform troll;
     private List<BoxCollider2D> spawns;
+    private TerrorBank terrorBank;
 
     // Use this for initialization
     private void Start()
     {
         this.cam = Camera.main;
         this.spawns = GameObject.FindGameObjectsWithTag("Spawn").Select(go => go.GetComponent<BoxCollider2D>()).ToList();
+        this.terrorBank = GameObject.Find("Overlord").GetComponent<TerrorBank>();
     }
 
     // Update is called once per frame
@@ -32,7 +34,11 @@ public class SpawnOnClick : MonoBehaviour
 
         if (this.spawns.Any(s => s.OverlapPoint(worldPosition)))
         {
-            Instantiate(selectedMonster, new Vector3(worldPosition.x, worldPosition.y, 0), Quaternion.identity);
+            int cost = selectedMonster.GetComponent<TerrorCost>().cost;
+
+            if (terrorBank.UseTerror(cost)) {
+                Instantiate(selectedMonster, new Vector3(worldPosition.x, worldPosition.y, 0), Quaternion.identity);
+            }
         }
     }
 
