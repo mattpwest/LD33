@@ -42,6 +42,14 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    private bool HasPositiveTerrorRating
+    {
+        get
+        {
+            return this.villageStats.GoalsAchieved > 0;
+        }
+    }
+
     private string ReadFile(string fileName)
     {
         if(!File.Exists(fileName))
@@ -100,15 +108,17 @@ public class GameHandler : MonoBehaviour
 
     private void AllBuildingsDestroyedEnd()
     {
-        this.player.CurrentLevel = this.NextLevel;
-        this.player.UpdateLevelStats(this.CurrentLevel, this.villageStats.GoalsAchieved);
-        this.SavePlayer();
-        Application.LoadLevel(this.NextLevel);
+        this.LoadNextLevel();
     }
 
     private void TimeHasRunOutEnd()
     {
-        Application.LoadLevel(0);
+        if (this.HasPositiveTerrorRating)
+        {
+            this.LoadNextLevel();
+        }
+
+        this.LoadMainMenu();
     }
 
     private Player LoadPlayer()
@@ -141,5 +151,18 @@ public class GameHandler : MonoBehaviour
     private string Serialize(Player player)
     {
         return JsonWriter.Serialize(player);
+    }
+
+    private void LoadNextLevel()
+    {
+        this.player.CurrentLevel = this.NextLevel;
+        this.player.UpdateLevelStats(this.CurrentLevel, this.villageStats.GoalsAchieved);
+        this.SavePlayer();
+        Application.LoadLevel(this.NextLevel);
+    }
+
+    private void LoadMainMenu()
+    {
+        Application.LoadLevel(0);
     }
 }
