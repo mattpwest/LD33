@@ -8,6 +8,10 @@ TextureImporter:
     21300002: background
     21300004: button
     21300006: mouth-watering-empty
+    21300008: LargeVillage
+    21300010: MediumVillage
+    21300012: OverworldMap
+    21300014: SmallVillage
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -53,11 +57,51 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: background
+    - name: LargeVillage
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 59
+        width: 129
+        height: 61
+      alignment: 9
+      pivot: {x: .519379854, y: .55737704}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MediumVillage
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 11
+        width: 58
+        height: 46
+      alignment: 9
+      pivot: {x: .508620679, y: .576086938}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: OverworldMap
       rect:
         serializedVersion: 2
         x: 2
-        y: 382
+        y: 122
+        width: 1600
+        height: 900
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SmallVillage
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 30
+        width: 32
+        height: 27
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: background
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 894
         width: 320
         height: 128
       alignment: 0
@@ -66,8 +110,8 @@ TextureImporter:
     - name: button
       rect:
         serializedVersion: 2
-        x: 2
-        y: 252
+        x: 1604
+        y: 764
         width: 320
         height: 128
       alignment: 0
@@ -76,8 +120,8 @@ TextureImporter:
     - name: mouth-watering-empty
       rect:
         serializedVersion: 2
-        x: 324
-        y: 391
+        x: 1604
+        y: 643
         width: 124
         height: 119
       alignment: 9
@@ -86,8 +130,8 @@ TextureImporter:
     - name: mouth-watering
       rect:
         serializedVersion: 2
-        x: 324
-        y: 272
+        x: 2
+        y: 3
         width: 121
         height: 117
       alignment: 9
