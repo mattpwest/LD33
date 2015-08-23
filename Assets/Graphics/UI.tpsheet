@@ -5,9 +5,12 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: UI.png (2048 x 1024)
-# $TexturePacker:SmartUpdate:881ef957f85cb78e80d515af4a8696ca:25143a44078fed9247547c5c4804cb05:64d56465927d50bb5400e4c66dc46a97$
+# $TexturePacker:SmartUpdate:09158260a29d620b0c67bacede5132ec:6615701d20e159d8040ab9ce93a4328f:64d56465927d50bb5400e4c66dc46a97$
 #
 
+HealthBar;185;2;24;8;0.5;0.5
+HealthFrameEvil;185;12;32;16;0.5;0.5
+HealthFrameGood;219;41;32;16;0.5;0.5
 LargeVillage;125;59;129;61;0.5193798449612403;0.5573770491803278
 MediumVillage;125;11;58;46;0.5086206896551724;0.5760869565217391
 OverworldMap;2;122;1600;900;0.5;0.5

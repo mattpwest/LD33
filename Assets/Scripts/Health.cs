@@ -9,17 +9,27 @@ using System.Collections;
 public class Health : MonoBehaviour {
 
     public float health = 1.0f;
+    float currentHealth = 0.0f;
+
+    public float GetHealth() {
+        return currentHealth;
+    }
+
+    public float GetHealthPercentage() {
+        return currentHealth / health;
+    }
 
 	void Start () {
+        currentHealth = health;
 	}
 	
 	void Update () {
-        if (health <= 0.0f) {
+        if (currentHealth <= 0.0f) {
             Destroy(this.gameObject);
         }
 	}
 
     public void TakeDamage(float damage) {
-        health -= damage;
+        currentHealth -= damage;
     }
 }

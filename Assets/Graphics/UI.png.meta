@@ -12,6 +12,9 @@ TextureImporter:
     21300010: MediumVillage
     21300012: OverworldMap
     21300014: SmallVillage
+    21300016: HealthBar
+    21300018: HealthFrameEvil
+    21300020: HealthFrameGood
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,6 +60,36 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
+    - name: HealthBar
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 2
+        width: 24
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HealthFrameEvil
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 12
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: HealthFrameGood
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 41
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: LargeVillage
       rect:
         serializedVersion: 2
