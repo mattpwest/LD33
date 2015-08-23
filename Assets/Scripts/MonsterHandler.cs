@@ -1,35 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class MonsterHandler : MonoBehaviour
 {
-    private List<GameObject> units;
-    private List<GameObject> buildings;
-    public GameObject BuildingsParent;
-
     // Use this for initialization
-    private void Start()
-    {
-        this.buildings = GameObject.FindGameObjectsWithTag("Building").ToList();
-        this.units = GameObject.FindGameObjectsWithTag("Monster").ToList();
-    }
+    private void Start() {}
 
     // Update is called once per frame
     private void Update()
     {
-        this.buildings = GameObject.FindGameObjectsWithTag("Building").ToList();
-        this.units = GameObject.FindGameObjectsWithTag("Monster").ToList();
+        var buildings = GameObject.FindGameObjectsWithTag("Building").ToList();
+        var units = GameObject.FindGameObjectsWithTag("Monster").ToList();
 
-        foreach(var unit in this.units)
+        foreach(var unit in units)
         {
-            unit.GetComponent<Move>().FindNewDestination(this.buildings);
+            unit.GetComponent<Move>().FindNewDestination(buildings);
         }
-    }
-
-    private void RemoveKilledUnits() {
-        List<GameObject> dead = this.units.Where(unit => unit == null).ToList();
-
-        dead.ForEach(d => units.Remove(d));
     }
 }
