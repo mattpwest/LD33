@@ -5,6 +5,14 @@ using UnityEngine.UI;
 public class TerrorBank : MonoBehaviour {
 
     public int initialTerror = 30;
+
+    public bool HasTerrorLeft
+    {
+        get
+        {
+            return terror > 0;
+        }
+    }
     int terror = 0;
     UnityEngine.UI.Text text;
 
