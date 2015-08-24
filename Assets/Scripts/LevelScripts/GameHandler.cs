@@ -11,6 +11,7 @@ public class GameHandler : MonoBehaviour
     private Player player;
     private TerrorBank terrorBank;
 
+    public GameObject gameEndModal;
     public GameObject VillageStats;
     public GameObject Clock;
     public GameObject TerrorBank;
@@ -102,19 +103,33 @@ public class GameHandler : MonoBehaviour
 
     private void AllBuildingsDestroyedEnd()
     {
+        /*
         this.player.UpdateLevelStats(this.CurrentLevel, this.villageStats.GoalsAchieved);
         this.SavePlayer();
         this.LoadNextLevel();
+         */
+        EndLevel();
     }
 
     private void EndLevel()
     {
+        clock.StopClock();
+        gameEndModal.SetActive(true);
+
+        if (this.HasPositiveTerrorRating) {
+            gameEndModal.transform.FindChild("ButtonNext").gameObject.SetActive(true);
+        } else {
+            gameEndModal.transform.FindChild("ButtonNext").gameObject.SetActive(false);
+        }
+
+        /*
         if(this.HasPositiveTerrorRating)
         {
             this.LoadNextLevel();
         }
 
         this.LoadMainMenu();
+         */
     }
 
     private Player LoadPlayer()
@@ -124,10 +139,11 @@ public class GameHandler : MonoBehaviour
         return string.IsNullOrEmpty(information) ? this.NewEmptyPlayer() : this.json.Deserialize(information);
     }
 
-    private void SavePlayer()
+    public void SavePlayer()
     {
-        var information = this.json.Serialize(this.player);
+        this.player.UpdateLevelStats(this.CurrentLevel, this.villageStats.GoalsAchieved);
 
+        var information = this.json.Serialize(this.player);
         this.files.WriteFile("Player.json", information);
     }
 

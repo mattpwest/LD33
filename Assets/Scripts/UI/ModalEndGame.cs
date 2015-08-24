@@ -3,19 +3,25 @@ using System.Collections;
 
 public class ModalEndGame : MonoBehaviour {
 
+    GameHandler gameHandler;
+
     public void WorldMap() {
-        Application.LoadLevel(5 + 1); // Woohoo - release night: hardcoding FTW! :P
+        gameHandler.SavePlayer();
+        Application.LoadLevel(5);
     }
 
     public void RetryLevel() {
-
+        Application.LoadLevel(gameHandler.CurrentLevel);
     }
 
     public void NextLevel() {
-
+        gameHandler.SavePlayer();
+        Application.LoadLevel(5);
     }
 
     void Start() {
+        gameObject.SetActive(false);
+        gameHandler = GameObject.FindObjectOfType<GameHandler>();
     }
 
     void Update() {

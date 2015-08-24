@@ -9,7 +9,17 @@ namespace Assets.Scripts.Persistence
         {
             get
             {
-                return this.Levels.Max(l => l.LevelNumber);
+                if (Levels.ToArray().Length == 0) {
+                    return 0;
+                }
+
+                for (int i = Levels.ToArray().Length - 1; i >= 0; i--) {
+                    if (Levels[i].TerrorRating > 0) {
+                        return i + 1;
+                    }
+                }
+
+                return 0;
             }
         }
         public List<Level> Levels;

@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
+using Assets.Scripts.Persistence;
 using System.Collections;
 
 public class WorldMap : MonoBehaviour {
+
+    private readonly Files files = new Files();
+    private readonly JSON<Player> json = new JSON<Player>();
+    Player player;
 
     public void GoMainMenu() {
         Application.LoadLevel(0);
@@ -24,10 +29,45 @@ public class WorldMap : MonoBehaviour {
     }
 
 	void Start () {
-	
+        player = LoadPlayer();
+
+        GameObject lvl1 = GameObject.Find("Level1");
+        GameObject lvl2 = GameObject.Find("Level2");
+        GameObject lvl3 = GameObject.Find("Level3");
+        GameObject lvl4 = GameObject.Find("Level4");
+
+        lvl1.SetActive(false);
+        lvl2.SetActive(false);
+        lvl3.SetActive(false);
+        lvl4.SetActive(false);
+
+        if (player.CurrentLevel >= 0) {
+            lvl1.SetActive(true);
+        }
+
+        if (player.CurrentLevel >= 1) {
+            lvl2.SetActive(true);
+        }
+
+        if (player.CurrentLevel >= 2) {
+            lvl3.SetActive(true);
+        }
+
+        if (player.CurrentLevel >= 3) {
+            lvl4.SetActive(true);
+        }
 	}
 	
 	void Update () {
-	
 	}
+
+    private Player LoadPlayer() {
+        var information = this.files.ReadFile("Player.json");
+
+        return string.IsNullOrEmpty(information) ? this.NewEmptyPlayer() : this.json.Deserialize(information);
+    }
+
+    private Player NewEmptyPlayer() {
+        return new Player();
+    }
 }
