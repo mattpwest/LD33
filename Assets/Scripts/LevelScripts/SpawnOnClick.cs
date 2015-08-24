@@ -15,6 +15,7 @@ public class SpawnOnClick : MonoBehaviour
     private Button[] buttons;
     private Vector3 spawnLocation = new Vector3(0, 0, 0);
     private int spawnFrameDelay = -1;
+    private Clock clock;
 
     private void Start()
     {
@@ -23,10 +24,15 @@ public class SpawnOnClick : MonoBehaviour
         this.spawns = GameObject.FindGameObjectsWithTag("Spawn").Select(go => go.GetComponent<BoxCollider2D>()).ToList();
         this.terrorBank = GameObject.Find("TerrorBank").GetComponent<TerrorBank>();
         buttons = GameObject.FindObjectsOfType<UnityEngine.UI.Button>();
+        clock = GameObject.FindObjectOfType<Clock>();
     }
 
     private void Update()
     {
+        if (clock.IsStopped) {
+            return;
+        }
+
         spawnFrameDelay--;
         spawnEnergy += Time.deltaTime;
 
