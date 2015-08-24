@@ -14,12 +14,13 @@ public class MeleeAtIntervals : Damage {
     void Update() {
         if (hitEnergy < hitIntervalSeconds) {
             hitEnergy += Time.deltaTime;
+            this.SetIsNotAttacking();
+
         } else {
             if (target != null) {
-                //Debug.Log("Melee hitting target...");
+                this.SetIsAttacking();
                 Hit(target);
             }/* else {
-                Debug.Log("Melee has no target...");
             }*/
         }
     }

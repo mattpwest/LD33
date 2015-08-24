@@ -50,7 +50,6 @@ public class HealthBar : MonoBehaviour {
         healthValueBar.transform.localScale = new Vector3(health.GetHealthPercentage(), 1.0f, 1.0f);
         float newX = barRenderer.bounds.min.x;
         float xChange = newX - oldX;
-        Debug.Log(xChange);
         healthValueBar.transform.position = new Vector3(
             healthValueBar.transform.position.x - xChange,
             healthValueBar.transform.position.y,
@@ -59,7 +58,6 @@ public class HealthBar : MonoBehaviour {
     }
 
     void OnDestroy() {
-        Debug.Log("Destroying healthbar...");
         Destroy(healthBarInstance);
     }
 }
