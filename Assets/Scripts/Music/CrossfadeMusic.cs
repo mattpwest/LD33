@@ -22,8 +22,6 @@ public class CrossfadeMusic : MonoBehaviour {
             FadeOut(warMusic, 0.0f);
             FadeIn(villageMusic, 1.0f);
         }
-
-        //Debug.Log("VOLUMES - village: " + villageMusic.volume + "; war: " + warMusic.volume);
 	}
 
     void FadeIn(AudioSource src, float level) {
