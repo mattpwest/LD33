@@ -1,23 +1,28 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Linq;
+using UnityEngine;
+using Random = System.Random;
 
 public class MonsterAttack : MonoBehaviour
 {
-
-    public AudioSource source;
     private Damage monsterDamage;
+    private Random random;
+    public AudioSource Source;
+    public AudioClip[] Clips;
 
-	// Use this for initialization
-	void Start ()
-	{
-	    this.monsterDamage = gameObject.GetComponent<Damage>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    if(monsterDamage.IsAttacking)
-	    {
-	        source.PlayOneShot(source.clip);
-	    }
-	}
+    // Use this for initialization
+    private void Start()
+    {
+        this.monsterDamage = this.gameObject.GetComponent<Damage>();
+        this.random = new Random();
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        if(this.monsterDamage.IsAttacking)
+        {
+            var clipIndex = this.random.Next(this.Clips.Count());
+            this.Source.PlayOneShot(this.Clips[clipIndex]);
+        }
+    }
 }
