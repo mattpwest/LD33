@@ -4,9 +4,9 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # http://www.codeandweb.com/texturepacker/unity
 #
-# Sprite sheet: Monsters.png (64 x 64)
-# $TexturePacker:SmartUpdate:cd8f818b2a27f518bcb250829f382589:3a26f7db082e25c1e5a7151977566a87:88b4fc49195414e79e5b7187c29c787d$
+# Sprite sheet: Monsters.png (64 x 32)
+# $TexturePacker:SmartUpdate:a1ebf2c1f03a2c62f00a6fde27a6f545:a65483adc76011385bbe41bdde7e3eeb:88b4fc49195414e79e5b7187c29c787d$
 #
 
-MonsterGoblin;36;50;16;12;0.5;0.33333333333333337
-MonsterTroll;2;30;32;32;0.5;0.5
+MonsterGoblin;36;18;16;12;0.5;0.33333333333333337
+MonsterTroll;2;5;32;25;0.5;0.43999999999999995
