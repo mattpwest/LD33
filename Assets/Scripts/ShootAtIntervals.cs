@@ -82,6 +82,8 @@ public class ShootAtIntervals : MonoBehaviour {
     }
 
     void OnDrawGizmos() {
+        #if UNITY_EDITOR
         UnityEditor.Handles.DrawWireDisc(gameObject.transform.position, Vector3.back, targetRadius);
+        #endif
     }
 }
