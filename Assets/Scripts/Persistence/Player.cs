@@ -5,7 +5,13 @@ namespace Assets.Scripts.Persistence
 {
     public class Player
     {
-        public int CurrentLevel;
+        public int CurrentLevel
+        {
+            get
+            {
+                return this.Levels.Max(l => l.LevelNumber);
+            }
+        }
         public List<Level> Levels;
 
         public Player()
