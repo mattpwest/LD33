@@ -50,6 +50,14 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    private bool HasPlayerRanOutOfTerror
+    {
+        get
+        {
+            return !this.terrorBank.HasTerrorLeft && !GameObject.FindGameObjectsWithTag("Monster").Any();
+        }
+    }
+
     private string ReadFile(string fileName)
     {
         if(!File.Exists(fileName))
@@ -101,7 +109,11 @@ public class GameHandler : MonoBehaviour
         }
         else if(this.HasTimeRunOut)
         {
-            this.TimeHasRunOutEnd();
+            this.EndLevel();
+        }
+        else if(this.HasPlayerRanOutOfTerror)
+        {
+            this.EndLevel();
         }
     }
 
@@ -110,7 +122,7 @@ public class GameHandler : MonoBehaviour
         this.LoadNextLevel();
     }
 
-    private void TimeHasRunOutEnd()
+    private void EndLevel()
     {
         if (this.HasPositiveTerrorRating)
         {
