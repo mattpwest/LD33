@@ -1,11 +1,11 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using Assets.Scripts.Persistence;
-using Pathfinding.Serialization.JsonFx;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
+    private readonly Files files = new Files();
+    private readonly JSON<Player> json = new JSON<Player>();
     private VillageStats villageStats;
     private Clock clock;
     private Player player;
@@ -58,23 +58,6 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    private string ReadFile(string fileName)
-    {
-        if(!File.Exists(fileName))
-        {
-            return string.Empty;
-        }
-
-        var contents = File.ReadAllText(fileName);
-
-        return contents;
-    }
-
-    private void WriteFile(string fileName, string contents)
-    {
-        File.WriteAllText(fileName, contents);
-    }
-
     // Use this for initialization
     private void Start()
     {
@@ -119,12 +102,14 @@ public class GameHandler : MonoBehaviour
 
     private void AllBuildingsDestroyedEnd()
     {
+        this.player.UpdateLevelStats(this.CurrentLevel, this.villageStats.GoalsAchieved);
+        this.SavePlayer();
         this.LoadNextLevel();
     }
 
     private void EndLevel()
     {
-        if (this.HasPositiveTerrorRating)
+        if(this.HasPositiveTerrorRating)
         {
             this.LoadNextLevel();
         }
@@ -134,41 +119,25 @@ public class GameHandler : MonoBehaviour
 
     private Player LoadPlayer()
     {
-        var information = this.ReadFile("Player.json");
+        var information = this.files.ReadFile("Player.json");
 
-        return string.IsNullOrEmpty(information) ? this.NewEmptyPlayer() : this.Deserialize(information);
+        return string.IsNullOrEmpty(information) ? this.NewEmptyPlayer() : this.json.Deserialize(information);
     }
 
     private void SavePlayer()
     {
-        var information = this.Serialize(this.player);
+        var information = this.json.Serialize(this.player);
 
-        this.WriteFile("Player.json", information);
-    }
-
-    private Player Deserialize(string json)
-    {
-        return JsonReader.Deserialize<Player>(json);
+        this.files.WriteFile("Player.json", information);
     }
 
     private Player NewEmptyPlayer()
     {
-        return new Player
-               {
-                   CurrentLevel = this.CurrentLevel
-               };
-    }
-
-    private string Serialize(Player player)
-    {
-        return JsonWriter.Serialize(player);
+        return new Player();
     }
 
     private void LoadNextLevel()
     {
-        this.player.CurrentLevel = this.NextLevel;
-        this.player.UpdateLevelStats(this.CurrentLevel, this.villageStats.GoalsAchieved);
-        this.SavePlayer();
         Application.LoadLevel(this.NextLevel);
     }
 
