@@ -12,10 +12,12 @@ public class ShootAtIntervals : MonoBehaviour {
     List<GameObject> targets;
     GameObject target;
     Vector2 towerPosition;
+    AudioSource arrowSound;
 
 	void Start () {
         towerPosition = GetComponent<Rigidbody2D>().position;
         shotEnergy = shotIntervalSeconds;
+        arrowSound = GetComponent<AudioSource>();
 	}
 	
 	void Update () {
@@ -56,6 +58,8 @@ public class ShootAtIntervals : MonoBehaviour {
             target = null;
             return;
         }
+
+        arrowSound.PlayOneShot(arrowSound.clip);
 
         shotEnergy = 0.0f;
         Rigidbody2D towerBody = this.gameObject.GetComponent<Rigidbody2D>();
