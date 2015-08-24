@@ -81,9 +81,8 @@ public class GameHandler : MonoBehaviour
             this.terrorBank.AddTerror(this.ExtraTerror);
             return;
         }
-        this.CurrentLevel = this.player.CurrentLevel;
         var extraTerror = this.player.Levels
-            .Where(l => l.LevelNumber <= this.CurrentLevel)
+            .Where(l => l.LevelNumber < this.CurrentLevel)
             .Sum(l => l.TerrorRating);
         this.terrorBank.AddTerror(extraTerror);
     }
