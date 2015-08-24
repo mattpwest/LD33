@@ -5,8 +5,8 @@
 # http://www.codeandweb.com/texturepacker/unity
 #
 # Sprite sheet: Towers.png (64 x 128)
-# $TexturePacker:SmartUpdate:fdc328dbfbac1fb21da24cf2f2ae4d22:49cca7a69448d5e72f00658a5edf9945:fdb88b16b1fcf08676fe577884ea6806$
+# $TexturePacker:SmartUpdate:1d0830f190fa1c640336843cfc0a2134:913a4fba54e4da3c286fe73e2b82a69d:fdb88b16b1fcf08676fe577884ea6806$
 #
 
-Arrow;2;52;7;12;0.5;0.5
+Arrow;2;57;12;7;0.5;0.5
 TowerArcher;2;66;60;60;0.5;0.5

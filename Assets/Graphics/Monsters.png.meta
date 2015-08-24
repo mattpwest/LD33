@@ -54,22 +54,22 @@ TextureImporter:
     - name: MonsterGoblin
       rect:
         serializedVersion: 2
-        x: 36
-        y: 18
-        width: 16
-        height: 12
+        x: 2
+        y: 12
+        width: 12
+        height: 16
       alignment: 9
-      pivot: {x: .5, y: .333333343}
+      pivot: {x: .333333343, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: MonsterTroll
       rect:
         serializedVersion: 2
         x: 2
-        y: 5
-        width: 32
-        height: 25
+        y: 30
+        width: 25
+        height: 32
       alignment: 9
-      pivot: {x: .5, y: .439999998}
+      pivot: {x: .439999998, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
